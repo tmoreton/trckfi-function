@@ -5,37 +5,40 @@ admin.initializeApp();
 
 const json2csv = require("json2csv").parse;
 const nodemailer = require("nodemailer");
-
 const configuration = new Configuration({
   basePath: PlaidEnvironments.sandbox,
   baseOptions: {
     headers: {
-      'PLAID-CLIENT-ID': 'user_good',
-      'PLAID-SECRET': 'pass_good',
+      'PLAID-CLIENT-ID': process.env.PLAID_CLIENT_ID,
+      'PLAID-SECRET': process.env.PLAID_SECRET
     },
   },
 });
 
 const client = new PlaidApi(configuration);
 
-exports.create_link_token = functions.https.onRequest(async function(req, res) {
-  const request = {
-    user: {
-      client_user_id: 'user-id',
-    },
-    client_name: 'Plaid Test App',
-    products: ['transactions'],
-    language: 'en',
-    webhook: 'https://webhook.example.com',
-    redirect_uri: 'https://domainname.com/oauth-page.html',
-    country_codes: ['US'],
-  };
-  try {
-    const createTokenResponse = await client.linkTokenCreate(request);
+exports.create_token = functions.https.onRequest(async function(req, res) {
+  functions.logger.log("Starting plaid stuff");
+  try{
+    const request = {
+      user: {
+        client_user_id: 'user-id',
+      },
+      client_name: 'Plaid Test App',
+      products: ['transactions'],
+      language: 'en',
+      webhook: 'https://webhook.example.com',
+      redirect_uri: 'https://domainname.com/oauth-page.html',
+      country_codes: ['US'],
+    };
+
+    const createTokenResponse = await client.post(request);
     // res.json(createTokenResponse.data);
+    functions.logger.log("token res:", createTokenResponse);
     res.status(200);
     res.send(createTokenResponse.data);
   } catch (error) {
+    functions.logger.log("token error:", error);
     res.send(error);
   }
 });
@@ -45,7 +48,7 @@ exports.email_csv = functions.https.onRequest(async function(req, res) {
   const email = req.query.email;
   functions.logger.log("UID:", uid);
   functions.logger.log("Email:", email);
-
+  
   let transaction_data = await admin.firestore().collection("users").doc(uid).collection("transactions").get().then(snapshot => {
     let arr = [];
     snapshot.forEach(doc => {
@@ -89,7 +92,7 @@ exports.email_csv = functions.https.onRequest(async function(req, res) {
     secure: true,
     auth: {
       user: "tim@trckfi.com",
-      pass: "",
+      pass: process.env.EMAIL_PASSWORD,
     }
   });
 

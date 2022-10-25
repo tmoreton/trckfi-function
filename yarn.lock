@@ -384,6 +384,13 @@
   dependencies:
     "retry" "0.13.1"
 
+"axios@0.21.4":
+  "integrity" "sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg=="
+  "resolved" "https://registry.npmjs.org/axios/-/axios-0.21.4.tgz"
+  "version" "0.21.4"
+  dependencies:
+    "follow-redirects" "^1.14.0"
+
 "balanced-match@^1.0.0":
   "integrity" "sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw=="
   "resolved" "https://registry.npmjs.org/balanced-match/-/balanced-match-1.0.2.tgz"
@@ -687,7 +694,7 @@
   "resolved" "https://registry.npmjs.org/event-target-shim/-/event-target-shim-5.0.1.tgz"
   "version" "5.0.1"
 
-"express@^4.17.1":
+"express@^4.17.1", "express@^4.18.2":
   "integrity" "sha512-5/PsL6iGPdfQ/lKM1UuielYgv3BUoJfz1aUwU9vHZ+J7gyvwdQXFEBIEIaxeGf0GIcreATNyBExtalisDbuMqQ=="
   "resolved" "https://registry.npmjs.org/express/-/express-4.18.2.tgz"
   "version" "4.18.2"
@@ -791,6 +798,11 @@
     "cors" "^2.8.5"
     "express" "^4.17.1"
     "node-fetch" "^2.6.7"
+
+"follow-redirects@^1.14.0":
+  "integrity" "sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA=="
+  "resolved" "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.15.2.tgz"
+  "version" "1.15.2"
 
 "forwarded@0.2.0":
   "integrity" "sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow=="
@@ -1437,6 +1449,13 @@
   "integrity" "sha512-5DFkuoqlv1uYQKxy8omFBeJPQcdoE07Kv2sferDCrAq1ohOU+MSDswDIbnx3YAM60qIOnYa53wBhXW0EbMonrQ=="
   "resolved" "https://registry.npmjs.org/path-to-regexp/-/path-to-regexp-0.1.7.tgz"
   "version" "0.1.7"
+
+"plaid@^11.0.0":
+  "integrity" "sha512-bS4q68OmL4AosOhD7MAbr/QhLgY2g7RQqmS7/pID6gSHZsi2D0jadzNtsLFI2Bpv7W6kmdQ6/aZ3k7nmRo1l7A=="
+  "resolved" "https://registry.npmjs.org/plaid/-/plaid-11.0.0.tgz"
+  "version" "11.0.0"
+  dependencies:
+    "axios" "0.21.4"
 
 "prelude-ls@~1.1.2":
   "integrity" "sha512-ESF23V4SKG6lVSGZgYNpbsiaAkdab6ZgOxe52p7+Kid3W3u3bxR4Vfd/o21dmN7jSt0IwgZ4v5MUd26FEtXE9w=="
