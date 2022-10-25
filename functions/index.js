@@ -89,7 +89,7 @@ exports.email_csv = functions.https.onRequest(async function(req, res) {
     secure: true,
     auth: {
       user: "tim@trckfi.com",
-      pass: "xw08LJw2fODBjAdSc19V",
+      pass: "",
     }
   });
 
