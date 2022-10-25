@@ -1,9 +1,44 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
+const { Configuration, PlaidApi, PlaidEnvironments } = require("plaid");
 admin.initializeApp();
 
 const json2csv = require("json2csv").parse;
 const nodemailer = require("nodemailer");
+
+const configuration = new Configuration({
+  basePath: PlaidEnvironments.sandbox,
+  baseOptions: {
+    headers: {
+      'PLAID-CLIENT-ID': 'user_good',
+      'PLAID-SECRET': 'pass_good',
+    },
+  },
+});
+
+const client = new PlaidApi(configuration);
+
+exports.create_link_token = functions.https.onRequest(async function(req, res) {
+  const request = {
+    user: {
+      client_user_id: 'user-id',
+    },
+    client_name: 'Plaid Test App',
+    products: ['transactions'],
+    language: 'en',
+    webhook: 'https://webhook.example.com',
+    redirect_uri: 'https://domainname.com/oauth-page.html',
+    country_codes: ['US'],
+  };
+  try {
+    const createTokenResponse = await client.linkTokenCreate(request);
+    // res.json(createTokenResponse.data);
+    res.status(200);
+    res.send(createTokenResponse.data);
+  } catch (error) {
+    res.send(error);
+  }
+});
 
 exports.email_csv = functions.https.onRequest(async function(req, res) {
   const uid = req.query.uid;
